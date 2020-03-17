@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
                 if (userId.length < 1) {
                     res.sendStatus(404);
                 } else {
-                    res.json({ userId, userLevel });
+                    res.json({ userId, userLevel, userFullName });
                 }
             }).catch(() => { // Query2 CATCH
                 res.sendStatus(500);
