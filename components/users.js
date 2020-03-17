@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         db.query('SELECT * FROM Residents').then(results => {
             for (let i = 0; i < results.length; i++) {
                 if (username == results[i].Username && password == results[i].Password) {
-                    userId = results[i].idUsers1;
+                    userId = results[i].idResidents;
                     userLevel = RESIDENT;
                 }
             }
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
             db.query('SELECT * FROM Custodians').then(results => {
                 for (let i = 0; i < results.length; i++) {
                     if (username == results[i].Username && password == results[i].Password) {
-                        userId = results[i].idUsers2;
+                        userId = results[i].idCustodians;
                         userLevel = CUSTODIAN;
                     }
                 }
