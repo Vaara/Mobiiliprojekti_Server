@@ -9,6 +9,7 @@ const CUSTODIAN = 1;
 router.get('/', (req, res) => {
     let userId = "";
     let userLevel = "";
+    let userFullName = "";
     const username = req.body.username;
     const password = req.body.password;
     if (username == null || password == null) {
@@ -21,6 +22,7 @@ router.get('/', (req, res) => {
                 if (username == results[i].Username && password == results[i].Password) {
                     userId = results[i].idResidents;
                     userLevel = RESIDENT;
+                    userFullName = results[i].Name;
                 }
             }
             // Custodians Query
@@ -29,6 +31,7 @@ router.get('/', (req, res) => {
                     if (username == results[i].Username && password == results[i].Password) {
                         userId = results[i].idCustodians;
                         userLevel = CUSTODIAN;
+                        userFullName = results[i].Name;
                     }
                 }
                 // Check if user found or not
