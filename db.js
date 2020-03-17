@@ -3,10 +3,10 @@ let pool = null;
 try {
   pool  = mysql.createPool({
     connectionLimit : 10,
-    host            : 'localhost',
-    user            : 'root',
-    password        : 'test',
-    database        : 'test'
+    host            : 'mobiledatabase.cufmhpovf1th.us-east-1.rds.amazonaws.com',
+    user            : 'admin',
+    password        : 'mobiledataproject',
+    database        : 'mobile'
 
   });
   

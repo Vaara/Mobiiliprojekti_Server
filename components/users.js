@@ -2,8 +2,8 @@ const express = require('express');
 const db = require('../db');
 const router = express.Router();
 
-const USER1 = 0;
-const USER2 = 1;
+const RESIDENT = 0;
+const CUSTODIAN = 1;
 
 
 router.get('/', (req, res) => {
@@ -15,20 +15,20 @@ router.get('/', (req, res) => {
         res.send("Missing username or password");
     }
     else {
-        // Users1 Query
-        db.query('SELECT * FROM users1').then(results => {
+        // Residents Query
+        db.query('SELECT * FROM Residents').then(results => {
             for (let i = 0; i < results.length; i++) {
-                if (username == results[i].username && password == results[i].password) {
+                if (username == results[i].Username && password == results[i].Password) {
                     userId = results[i].idUsers1;
-                    userLevel = USER1;
+                    userLevel = RESIDENT;
                 }
             }
-            // Users2 Query
-            db.query('SELECT * FROM users2').then(results => {
+            // Custodians Query
+            db.query('SELECT * FROM Custodians').then(results => {
                 for (let i = 0; i < results.length; i++) {
-                    if (username == results[i].username && password == results[i].password) {
+                    if (username == results[i].Username && password == results[i].Password) {
                         userId = results[i].idUsers2;
-                        userLevel = USER2;
+                        userLevel = CUSTODIAN;
                     }
                 }
                 // Check if user found or not
