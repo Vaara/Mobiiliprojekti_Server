@@ -10,10 +10,11 @@ router.get('/', (req, res) => {
     let userId = "";
     let userLevel = "";
     let userFullName = "";
+    let userHousingCooperativeId = "";
     const username = req.body.username;
     const password = req.body.password;
     if (username == null || password == null) {
-        res.send("Missing username or password");
+        res.sendStatus(400);
     }
     else {
         // Residents Query
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
                     userId = results[i].idResidents;
                     userLevel = RESIDENT;
                     userFullName = results[i].Name;
+                    userHousingCooperativeId = results[i].idHousingCooperative;
                 }
             }
             // Custodians Query
@@ -32,13 +34,20 @@ router.get('/', (req, res) => {
                         userId = results[i].idCustodians;
                         userLevel = CUSTODIAN;
                         userFullName = results[i].Name;
+                        userHousingCooperativeId = results[i].idPropertyMaintenance;
                     }
                 }
                 // Check if user found or not
                 if (userId.length < 1) {
                     res.sendStatus(404);
                 } else {
-                    res.json({ userId, userLevel, userFullName });
+                    if (userLevel == 0) {
+                        res.json({ userId, userLevel, userFullName, userHousingCooperativeId });
+                    }
+                    else if (userLevel == 1) {
+                        res.json({ userId, userLevel, userFullName, "userPropertyMaintenanceId" : userHousingCooperativeId });
+                    }
+                    
                 }
             }).catch(() => { // Query2 CATCH
                 res.sendStatus(500);
