@@ -6,7 +6,7 @@ const RESIDENT = 0;
 const CUSTODIAN = 1;
 
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
     let userId = "";
     let userLevel = "";
     let userFullName = "";
