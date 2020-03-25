@@ -9,12 +9,7 @@ router.get('/', (req, res) => {
 router.get('/:serviceAdviceId', (req, res) => {
     db.query('SELECT * FROM ServiceAdviceReports WHERE idServiceAdvices = ?', [req.params.serviceAdviceId])
     .then(results => {
-        if (results.length > 0) {
-            res.json({ results });
-        }
-        else {
-            res.sendStatus(404);
-        }
+        res.json({ results });
     }).catch(() => {
         res.sendStatus(500);
     });

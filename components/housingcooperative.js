@@ -9,12 +9,7 @@ router.get('/', (req, res) => {
 router.get('/:housingCooperativeId', (req, res) => {
     db.query('SELECT * FROM HousingCooperative WHERE idHousingCooperative = ?', [req.params.housingCooperativeId])
     .then(results => {
-        if (results.length > 0) {
-            res.json({ results });
-        }
-        else {
-            res.sendStatus(404);
-        }
+        res.json({ results });
     }).catch(() => {
         res.sendStatus(500);
     });
