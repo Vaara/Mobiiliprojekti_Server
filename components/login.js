@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
                 }
                 // Check if user found or not
                 if (userId.length < 1) {
-                    res.sendStatus(404);
+                    res.json({ Error : "not found" })
                 } else {
                     if (userLevel == 0) {
                         res.json({ userId, userLevel, userFullName, userHousingCooperativeId });
