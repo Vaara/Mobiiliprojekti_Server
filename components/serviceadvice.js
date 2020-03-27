@@ -6,11 +6,29 @@ router.get('/', (req, res) => {
     res.sendStatus(400); 
 });
 
-router.get('/:serviceAdviceId', (req, res) => {
-    db.query('SELECT * FROM ServiceAdvices WHERE idHousingCooperative = ?', [req.params.serviceAdviceId])
+router.get('/:propertyMaintenceId', (req, res) => {
+    let queryMessage = " ";
+    db.query('SELECT idHousingCooperative FROM HousingCooperative WHERE idPropertyMaintenance = ?', [req.params.propertyMaintenceId])
     .then(results => {
-        res.json({ results });
-    }).catch(() => {
+        if (results.length > 0) {
+            for (let i = 0; i < results.length; i++) {
+                if (i == results.length - 1) {
+                    queryMessage = queryMessage + results[i].idHousingCooperative;  
+                }
+                else {
+                    queryMessage = queryMessage + results[i].idHousingCooperative + " OR ";
+                }
+            }
+            queryMessage = "SELECT * FROM ServiceAdvices WHERE idHousingCooperative =" + queryMessage;
+            db.query(queryMessage.toString()).then(results => {
+                res.json({ results });
+            }).catch((error) => {
+                res.sendStatus(500);
+                console.log(error);
+            });
+        }
+        else { res.json({ results })
+    }}).catch(() => {
         res.sendStatus(500);
     });
 });
