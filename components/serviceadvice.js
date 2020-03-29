@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     else {
         db.query('INSERT INTO ServiceAdvices (idResidents, idHousingCooperative, ServiceMessageTitle, ServiceMessage, AdditionalMessage, ImageId, MasterKeyAllowed, ContactResident)'
         + ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [req.body.idResidents, req.body.idHousingCooperative, req.body.ServiceMessageTitle, req.body.ServiceMessage, req.body.AdditionalMessage, req.body.ImageId, req.body.MasterKeyAllowed, req.body.ContactResident])
+        [req.body.idResidents, req.body.idHousingCooperative, req.body.Title, req.body.Message, req.body.AdditionalMessage, req.body.ImageId, req.body.MasterKeyAllowed, req.body.ContactResident])
         .then(() => {
             res.sendStatus(200);
         }).catch(() => {
