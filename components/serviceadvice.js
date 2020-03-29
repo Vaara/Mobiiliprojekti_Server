@@ -34,10 +34,10 @@ router.get('/:propertyMaintenceId', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    if (req.body.MasterKeyAllowed < 0  || req.body.MasterKeyAllowed > 1) {
+    if (req.body.MasterKeyAllowed < 0  || req.body.MasterKeyAllowed > 1 || typeof req.body.MasterKeyAllowed === 'undefined') {
         res.sendStatus(400);
     }
-    else if (req.body.ContactResident < 0 || req.body.ContactResident > 1) {
+    else if (req.body.ContactResident < 0 || req.body.ContactResident > 1 || typeof req.body.ContactResident === 'undefined') {
         res.sendStatus(400);
     }
     else {
