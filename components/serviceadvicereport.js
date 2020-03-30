@@ -18,6 +18,13 @@ router.get('/:serviceAdviceId', (req, res) => {
 router.post('/', (req, res) => {
     db.query('INSERT INTO ServiceAdviceReports (idServiceAdvices, idCustodians, CustodianReport) VALUES (?, ?, ?)',
     [req.body.idServiceAdvices, req.body.idCustodians, req.body.CustodianReport]).then(() => {
+        //
+        db.query('UPDATE ServiceAdvices SET Done = ? WHERE idServiceAdvices = ?', [1, req.body.idServiceAdvices])
+        .then(() => {
+            //
+        }).catch(() => {
+            res.sendStatus(500);
+        });
         res.sendStatus(200);
     }).catch((error) => {
         console.log(error);

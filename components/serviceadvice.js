@@ -52,16 +52,4 @@ router.post('/', (req, res) => {
     }
 });
 
-router.post('/done', (req, res) => {
-    res.sendStatus(400);
-});
-router.post('/done/:idServiceAdvice', (req, res) => {
-    db.query('UPDATE ServiceAdvices SET Done = ? WHERE idServiceAdvices = ?', [1, req.params.idServiceAdvice])
-    .then(() => {
-        res.sendStatus(200);
-    }).catch(() => {
-        res.sendStatus(500);
-    });
-});
-
 module.exports = router;
