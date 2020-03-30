@@ -3,7 +3,11 @@ const db = require('../db');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.sendStatus(400); 
+    db.query('SELECT * FROM HousingCooperative').then(results => {
+        res.json({ results });
+    }).catch(() => {
+        res.sendStatus(500);
+    });
 });
 
 router.get('/:housingCooperativeId', (req, res) => {
