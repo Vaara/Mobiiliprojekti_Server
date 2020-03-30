@@ -9,12 +9,7 @@ router.get('/', (req, res) => {
 router.get('/:custodianId', (req, res) => {
     db.query('SELECT * FROM Custodians WHERE idCustodians = ?', [req.params.custodianId])
     .then(results => {
-        if (results.length > 0) {
-            res.json({ results });
-        }
-        else {
-            res.sendStatus(404);
-        }
+        res.json({ results });
     }).catch(() => {
         res.sendStatus(500);
     });

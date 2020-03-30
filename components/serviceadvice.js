@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
         + ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [req.body.idResidents, req.body.idHousingCooperative, req.body.ServiceMessageTitle, req.body.ServiceMessage, req.body.AdditionalMessage, req.body.ImageId, req.body.MasterKeyAllowed, req.body.ContactResident])
         .then(() => {
-            res.sendStatus(200);
+            res.sendStatus(201);
         }).catch(() => {
             res.sendStatus(500);
         });
