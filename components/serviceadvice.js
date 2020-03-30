@@ -6,6 +6,10 @@ router.get('/', (req, res) => {
     res.sendStatus(400); 
 });
 
+router.get('/single/', (req, res) => {
+    res.sendStatus(400);
+});
+
 router.get('/:propertyMaintenceId', (req, res) => {
     let queryMessage = " ";
     db.query('SELECT idHousingCooperative FROM HousingCooperative WHERE idPropertyMaintenance = ?', [req.params.propertyMaintenceId])
@@ -29,6 +33,17 @@ router.get('/:propertyMaintenceId', (req, res) => {
         }
         else { res.json({ results })
     }}).catch(() => {
+        res.sendStatus(500);
+    });
+});
+
+
+
+router.get('/single/:serviceAdviceId', (req, res) => {
+    db.query('SELECT * FROM ServiceAdvices WHERE idServiceAdvices = ?', [req.params.serviceAdviceId])
+    .then(results => {
+        res.json({ results });
+    }).catch(() => {
         res.sendStatus(500);
     });
 });
